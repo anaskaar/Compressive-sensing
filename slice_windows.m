@@ -5,19 +5,18 @@ function [ Ws ] = slice_windows( M,hole_s )
 % windows.
 % hole_s, s_x and s_y must be pow(2,n).
 
-[s_x,s_y]=size(M);
+[s_x,s_y]=size(M)
 
-N_x = s_x / (2*hole_s);
-N_y = s_y / (2*hole_s);
+N_x = s_x / hole_s;
+N_y = s_y / hole_s;
 N = N_x*N_y;
-
 % initialization of Ws
-Ws = zeros(hole_s*2,hole_s*2,N);
+Ws = zeros(hole_s,hole_s,N);
 k = 1;
 for i = 0 :N_x-1
     for j = 0 :N_y-1
         
-        Ws(:,:,k) = M(i*hole_s*2+1:i*hole_s*2+hole_s*2,j*hole_s*2+1:j*hole_s*2+hole_s*2);
+        Ws(:,:,k) = M(i*hole_s+1:i*hole_s+hole_s,j*hole_s+1:j*hole_s+hole_s);
         
         k = k+1;
         
